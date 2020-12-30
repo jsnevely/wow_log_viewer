@@ -1,0 +1,23 @@
+{
+  "name": "wow_log_viewer",
+  "version": "1.0.0",
+  "description": "A desktop log viwer for World of Warcraft",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsnevely/wow_log_viewer.git"
+  },
+  "keywords": [],
+  "author": "Joe Snevely",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jsnevely/wow_log_viewer/issues"
+  },
+  "homepage": "https://github.com/jsnevely/wow_log_viewer#readme",
+  "dependencies": {
+    "tail": "^2.1.1"
+  }
+}

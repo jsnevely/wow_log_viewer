@@ -6,7 +6,7 @@ class LogEntry{
             const DATE_SPLIT = _str.indexOf('  ');
             this.date = new Date(_str.substring(0, DATE_SPLIT));
             let _data = _str.substring(DATE_SPLIT + 2).replace(/"/g, '').split(',');
-            let x = 0;
+            this.data = _data
         }
     }
 };

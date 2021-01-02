@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/jsnevely/wow_log_viewer#readme",
   "dependencies": {
+    "n-readlines": "1.0.1",
     "tailing-stream": "0.2.0"
   }
 }

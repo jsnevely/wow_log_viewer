@@ -6,6 +6,7 @@ const LogEntry = require('./LogEntry');
 const LineByLine = require('n-readlines');
 
 let entries = [];
+let dmg = {};
 
 async function main() {
     try {
@@ -46,7 +47,7 @@ function initializeFile() {
             let data = line.toString('ascii');
             file_length += data.length;
             line_number++;
-            entries.push(new LogEntry(data));
+            addEntry(new LogEntry(data));
         }
 
         console.log(`file_length: ${file_length}, lines: ${line_number}`);
@@ -63,9 +64,9 @@ function readFile(len) {
             data = data.split('\r\n').filter(a => a.length > 0);
             for(let d of data) {
                 let e = new LogEntry(d);
-                console.log(e);
-                entries.push(e)
+                addEntry(e);
             }
+            showValues();
         });
 
         stream.on('close', () => {
@@ -75,6 +76,22 @@ function readFile(len) {
     });
 }
 
+function addEntry(e) {
+    if(e.damage) {
+        let entry = {char: e.data[2], type: e.type, dmg: parseInt(e.data[29]), spell: e.data[10]};
+        // console.log(`${entry.char} - ${entry.type} - ${entry.spell} - ${entry.dmg}`);
+        entries.push(entry);
+        if(dmg[entry.char]) dmg[entry.char] += entry.dmg;
+        else dmg[entry.char] = entry.dmg;
+    }
+}
+
+function showValues() {
+    Object.entries(dmg)
+        .filter(v => v[0].indexOf('-') > 0)
+        .sort((a, b) => b[1] - a[1])
+        .map(v => console.log(`${v[0]} : ${v[1]}`));
+}
 
 main().then(() => {
     process.exit(0);
